@@ -4,6 +4,9 @@
     // Windows specific includes
     #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
+#elif defined(__APPLE__)
+    // macOS specific includes
+    #include <CoreFoundation/CoreFoundation.h>
 #else
     // Linux specific includes
     #include <locale.h>
@@ -24,6 +27,18 @@ bool Is24HourClock() {
         }
     }
     return false;  // 12-hour format
+#elif defined(__APPLE__)
+    CFPropertyListRef value = CFPreferencesCopyAppValue(CFSTR("AppleICUForce24HourTime"), kCFPreferencesCurrentApplication);
+    bool is24 = false;
+    if (value && CFGetTypeID(value) == CFBooleanGetTypeID()){
+        is24 = CFBooleanGetValue((CFBooleanRef)value);
+    }
+
+    if(value){
+        CFRelease(value);
+    }
+
+    return is24;
 #else
     // Linux code
     // Set locale based on the environment

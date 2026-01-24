@@ -8,7 +8,7 @@ Because I can't detect System Time Format in Unity
 |---------|-----------|
 | Windows | ✔️         |
 | Linux   | ✔️         |
-| macOS   | ❌         |
+| macOS   | ✔️         |
 | Android | ❌         |
 
 ✔️ - Supported

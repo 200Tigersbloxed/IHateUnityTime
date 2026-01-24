@@ -4,3 +4,7 @@ project(IHateUnityTime)
 set(CMAKE_C_STANDARD 17)
 
 add_library(IHateUnityTime SHARED library.c library.h)
+
+if(APPLE)
+    target_link_libraries(IHateUnityTime "-framework CoreFoundation" )
+endif()
